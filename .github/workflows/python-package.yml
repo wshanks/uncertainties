@@ -28,11 +28,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install -e .
+        python -m pip install .
         python -m pip install pytest pytest-cov numpy
+        python -c "import shutil; shutil.rmtree('uncertainties')"
     - name: Test source code and docs
       run: |
-        pytest --cov . --cov-report xml
+        pytest --cov tests --cov-report xml
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v4.0.1
       with:
